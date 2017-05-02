@@ -1,3 +1,5 @@
+package ui;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,10 +10,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-public class App implements Runnable {
+public class Application implements Runnable {
 	public static final String TITLE = "Image Viewer";
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
@@ -59,7 +60,4 @@ public class App implements Runnable {
 		return menuBar;
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new App());
-	}
 }

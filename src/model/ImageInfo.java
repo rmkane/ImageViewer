@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +44,8 @@ public class ImageInfo {
 
 	@Override
 	public String toString() {
-		return String.format("{ location: %s, name: %s, width: %s, height: %s, size: %s }", location, name, width,
-				height, size);
+		return String.format(
+			"{ location: %s, name: %s, width: %s, height: %s, size: %s }",
+			location, name, width, height, size);
 	}
 }

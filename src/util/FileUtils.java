@@ -1,6 +1,7 @@
+package util;
+
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 
 public class FileUtils {
 	static final String[] EXTENSIONS = new String[] { "gif", "png", "bmp" };
@@ -16,17 +17,5 @@ public class FileUtils {
 	
 	public static File[] retrieveImagesFromDir(File dir) {
 		return dir.isDirectory() ? dir.listFiles(IMAGE_FILTER) : new File[0];
-	}
-
-	public static void main(String[] args) {
-		File dir = new File("C:/Users/rmkane2/Pictures");
-		
-		for (final File i : retrieveImagesFromDir(dir)) {
-			try {
-				System.out.println(new ImageInfo(i));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }

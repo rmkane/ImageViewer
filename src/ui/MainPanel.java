@@ -1,3 +1,5 @@
+package ui;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -12,7 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import model.ImageInfo;
+import util.FileUtils;
 
 public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 3297439851964876410L;
@@ -22,6 +28,7 @@ public class MainPanel extends JPanel {
 	private List<ImageInfo> paths = new ArrayList<ImageInfo>();
 	private int imageIndex = 0;
 
+	private JTextField pathTxt;
 	private JLabel nameLabel;
 	private ImagePanel imagePanel;
 	private JButton prevButton;
@@ -33,15 +40,25 @@ public class MainPanel extends JPanel {
 		
 		Font font = new Font("Arial", Font.BOLD, 24);
 		
+		JPanel infoPanel = new JPanel(new BorderLayout());
+		add(infoPanel, BorderLayout.NORTH);
+		
+		JLabel pathLbl = new JLabel("Path: ");
+		infoPanel.add(pathLbl, BorderLayout.WEST);
+		
+		pathTxt = new JTextField();
+		infoPanel.add(pathTxt, BorderLayout.CENTER);
+		
 		nameLabel = new JLabel("{{NAME}}", SwingConstants.CENTER);
 		nameLabel.setFont(font);
-		add(nameLabel, BorderLayout.NORTH);
+		infoPanel.add(nameLabel, BorderLayout.SOUTH);
 		
 		imagePanel = new ImagePanel();
 		imagePanel.setAlignmentX(SwingConstants.CENTER);
 		add(imagePanel, BorderLayout.CENTER);
 
 		JPanel buttonContainer = new JPanel(new FlowLayout());
+		add(buttonContainer, BorderLayout.SOUTH);
 
 		prevButton = new JButton("<< Prev");
 		prevButton.addActionListener(prevAction);
@@ -53,8 +70,6 @@ public class MainPanel extends JPanel {
 		nextButton = new JButton("Next >>");
 		nextButton.addActionListener(nextAction);
 		buttonContainer.add(nextButton);
-
-		add(buttonContainer, BorderLayout.SOUTH);
 	}
 
 	private void loadImage() {
@@ -96,6 +111,8 @@ public class MainPanel extends JPanel {
 			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				currDir = chooser.getSelectedFile();
 
+				pathTxt.setText(currDir.getAbsolutePath());
+				
 				paths.clear();
 				for (File file : FileUtils.retrieveImagesFromDir(currDir)) {
 					try {
